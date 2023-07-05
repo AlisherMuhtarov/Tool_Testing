@@ -61,6 +61,6 @@ build {
       "chmod +x /tmp/npm&node.sh",
       "/tmp/npm&node.sh",
     ]
-    execute_command = "echo 'packer' | sudo sh"
+    execute_command = "echo 'root' | sudo sh"
   }
 }
