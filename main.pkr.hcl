@@ -38,17 +38,17 @@ build {
   sources = ["source.amazon-ebs.launching"]
 
   provisioner "file" {
-    source = "~/python&pip3.sh"
+    source = "python&pip3.sh"
     destination = "/tmp/python&pip3.sh"
   }
 
   provisioner "file" {
-    source = "~/requirements.txt"
+    source = "requirements.txt"
     destination = "/tmp/requirements.txt"
   }
 
   provisioner "file" {
-    source = "~/npm&node.sh"
+    source = "npm&node.sh"
     destination = "/tmp/npm&node.sh"
   }
 
