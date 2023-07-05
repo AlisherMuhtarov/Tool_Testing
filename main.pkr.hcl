@@ -62,6 +62,5 @@ build {
       "/tmp/npm&node.sh",
     ]
     execute_command = "echo 'packer' | sudo sh"
-"
   }
 }
