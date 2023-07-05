@@ -26,7 +26,7 @@ source "amazon-ebs" "launching" {
   instance_type        = "t2.micro"
   region               = "us-east-1"
   source_ami           = data.amazon-ami.amazonlinux.id
-  ssh_username         = "ubuntu"
+  ssh_username         = "ec2-user"
   communicator         = "ssh"
 
   force_deregister = false
