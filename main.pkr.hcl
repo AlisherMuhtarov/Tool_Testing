@@ -39,27 +39,27 @@ build {
 
   provisioner "file" {
     source = "python-pip3.sh"
-    destination = "/tmp/python-pip3.sh"
+    destination = "/home/ec2-user/python-pip3.sh"
   }
 
   provisioner "file" {
     source = "requirements.txt"
-    destination = "/tmp/requirements.txt"
+    destination = "/home/ec2-user/requirements.txt"
   }
 
   provisioner "file" {
     source = "npm-node.sh"
-    destination = "/tmp/npm-node.sh"
+    destination = "/home/ec2-user/npm-node.sh"
   }
 
   provisioner "shell" {
 
     inline = [
-      "sudo chmod +x /tmp/python-pip3.sh",
-      "/tmp/python-pip3.sh",
-      "pip3 install -r /tmp/requirements.txt",
-      "sudo chmod +x /tmp/npm-node.sh",
-      "/tmp/npm-node.sh",
+      "sudo chmod +x /home/ec2-user/python-pip3.sh",
+      "/home/ec2-user/python-pip3.sh",
+      "pip3 install -r /home/ec2-user/requirements.txt",
+      "sudo chmod +x /home/ec2-user/npm-node.sh",
+      "/home/ec2-user/npm-node.sh",
     ]
     execute_command = "sudo sh"
   }
