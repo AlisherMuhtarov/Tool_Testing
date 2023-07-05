@@ -55,10 +55,10 @@ build {
   provisioner "shell" {
 
     inline = [
-      "chmod +x /tmp/python-pip3.sh",
+      "sudo chmod +x /tmp/python-pip3.sh",
       "/tmp/python-pip3.sh",
       "pip3 install -r /tmp/requirements.txt",
-      "chmod +x /tmp/npm-node.sh",
+      "sudo chmod +x /tmp/npm-node.sh",
       "/tmp/npm-node.sh",
     ]
     execute_command = "sudo sh"
