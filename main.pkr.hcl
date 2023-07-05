@@ -61,8 +61,5 @@ build {
       "/tmp/python&pip3.sh",
       "/tmp/npm&node.sh",
     ]
-
-    execute_command = "sudo"
-
   }
 }
