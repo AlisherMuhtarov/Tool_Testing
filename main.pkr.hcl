@@ -38,8 +38,8 @@ build {
   sources = ["source.amazon-ebs.launching"]
 
   provisioner "file" {
-    source = "python&pip3.sh"
-    destination = "/tmp/python&pip3.sh"
+    source = "python-pip3.sh"
+    destination = "/tmp/python-pip3.sh"
   }
 
   provisioner "file" {
@@ -48,19 +48,19 @@ build {
   }
 
   provisioner "file" {
-    source = "npm&node.sh"
-    destination = "/tmp/npm&node.sh"
+    source = "npm-node.sh"
+    destination = "/tmp/npm-node.sh"
   }
 
   provisioner "shell" {
 
     inline = [
-      "chmod +x /tmp/python&pip3.sh",
-      "/tmp/python&pip3.sh",
+      "chmod +x /tmp/python-pip3.sh",
+      "/tmp/python-pip3.sh",
       "pip3 install -r /tmp/requirements.txt",
-      "chmod +x /tmp/npm&node.sh",
-      "/tmp/npm&node.sh",
+      "chmod +x /tmp/npm-node.sh",
+      "/tmp/npm-node.sh",
     ]
-    execute_command = "sudo"
+    execute_command = "sudo sh"
   }
 }
