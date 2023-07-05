@@ -61,5 +61,6 @@ build {
       "chmod +x /tmp/npm&node.sh",
       "/tmp/npm&node.sh",
     ]
+    execute_command = "sudo -E -S sh -c | sudo -S -E bash {{ .Path }}'"
   }
 }
