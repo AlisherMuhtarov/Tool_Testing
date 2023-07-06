@@ -15,8 +15,8 @@ tar -xf Python-3.9.17.tgz
 # Change to the extracted directory
 cd Python-3.9.17
 
-# Configure the Python build
-./configure --enable-optimizations
+# Configure the Python build with zlib support
+./configure --enable-optimizations --with-zlib=/usr/include
 
 # Compile and install Python
 sudo make altinstall
