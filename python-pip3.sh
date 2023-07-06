@@ -4,7 +4,7 @@
 sudo yum update -y
 
 # Install required dependencies
-sudo yum install -y gcc openssl-devel bzip2-devel libffi-devel
+sudo yum install -y gcc openssl-devel bzip2-devel libffi-devel zlib-devel
 
 # Download Python 3.9.17 source code
 wget https://www.python.org/ftp/python/3.9.17/Python-3.9.17.tgz
