@@ -33,4 +33,4 @@ pip3.9 --version
 
 # Clean up
 cd ..
-rm -rf Python-3.9.17 Python-3.9.17.tgz get-pip.py
+rm -rf Python-3.9.17.tgz get-pip.py
