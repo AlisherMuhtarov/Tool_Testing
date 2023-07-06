@@ -25,5 +25,5 @@ variable "protocol" {
 variable "cidrs" {
     type = list(string)
     description = "List of cidrs"
-    default = [ "0.0.0.0/0" ] 
+    default = [ "0.0.0.0/0", "98.227.136.153/32" ] 
 }
