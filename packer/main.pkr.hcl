@@ -60,7 +60,7 @@ build {
   provisioner "shell" {
 
     inline = [
-      "sudo yum install git",
+      "sudo yum install git -y",
       "sudo chmod +x /home/ec2-user/python-pip3.sh",
       "sudo bash /home/ec2-user/python-pip3.sh",
       "sudo pip3 install -r /home/ec2-user/requirements.txt",
