@@ -61,6 +61,5 @@ build {
       "sudo chmod +x /home/ec2-user/npm-node.sh",
       "bash /home/ec2-user/npm-node.sh",
     ]
-    execute_command = "sudo sh"
   }
 }
