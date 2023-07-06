@@ -56,10 +56,10 @@ build {
 
     inline = [
       "sudo chmod +x /home/ec2-user/python-pip3.sh",
-      "bash /home/ec2-user/python-pip3.sh",
-      "pip3 install -r /home/ec2-user/requirements.txt",
-      "sudo chmod +x /home/ec2-user/npm-node.sh",
-      "bash /home/ec2-user/npm-node.sh",
+      "sudo bash /home/ec2-user/python-pip3.sh",
+      "sudo pip3 install -r /home/ec2-user/requirements.txt",
+      "sudo sudo chmod +x /home/ec2-user/npm-node.sh",
+      "sudo bash /home/ec2-user/npm-node.sh",
     ]
   }
 }
