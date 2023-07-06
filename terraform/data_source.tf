@@ -17,3 +17,7 @@ data "aws_ami" "ec2_launch" {
     values = ["hvm"]
   }
 }
+
+data "aws_ip_ranges" "current" {
+  regions = ["current"]
+}
