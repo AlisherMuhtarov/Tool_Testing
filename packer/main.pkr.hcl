@@ -52,12 +52,18 @@ build {
     destination = "/home/ec2-user/npm-node.sh"
   }
 
+  provisioner "file" {
+    source = "sqlite3.sh"
+    destination "/home/ec2-user/sqlite.sh"
+  }
+
   provisioner "shell" {
 
     inline = [
       "sudo chmod +x /home/ec2-user/python-pip3.sh",
       "sudo bash /home/ec2-user/python-pip3.sh",
       "sudo pip3 install -r /home/ec2-user/requirements.txt",
+      "sudo bash /home/ec2-user/sqlite.sh"
       "sudo sudo chmod +x /home/ec2-user/npm-node.sh",
       "sudo bash /home/ec2-user/npm-node.sh",
     ]
