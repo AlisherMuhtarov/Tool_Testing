@@ -54,12 +54,13 @@ build {
 
   provisioner "file" {
     source = "sqlite3.sh"
-    destination "/home/ec2-user/sqlite.sh"
+    destination = "/home/ec2-user/sqlite.sh"
   }
 
   provisioner "shell" {
 
     inline = [
+      "sudo yum install git"
       "sudo chmod +x /home/ec2-user/python-pip3.sh",
       "sudo bash /home/ec2-user/python-pip3.sh",
       "sudo pip3 install -r /home/ec2-user/requirements.txt",
