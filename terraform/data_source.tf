@@ -1,7 +1,3 @@
-data "http" "myip" {
-  url = "http://ipv4.icanhazip.com"
-}
-
 data "aws_ami" "ec2_launch" {
   most_recent      = true
   owners           = ["self"]

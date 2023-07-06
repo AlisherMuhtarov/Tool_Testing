@@ -6,7 +6,7 @@
         from_port        = var.ports[2]
         to_port          = var.ports[2]
         protocol         = var.protocol[1]
-        cidr_blocks      = ["${chomp(data.http.myip.body)}/32"] 
+        cidr_blocks      = ["${self.ipv4_address}/32"]
     }
 
     egress {
