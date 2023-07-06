@@ -19,5 +19,6 @@ data "aws_ami" "ec2_launch" {
 }
 
 data "aws_ip_ranges" "current" {
-  regions = ["current"]
+  regions = ["us-east-1"]
+  services = ["amazon"]
 }
