@@ -60,11 +60,11 @@ build {
   provisioner "shell" {
 
     inline = [
-      "sudo yum install git"
+      "sudo yum install git",
       "sudo chmod +x /home/ec2-user/python-pip3.sh",
       "sudo bash /home/ec2-user/python-pip3.sh",
       "sudo pip3 install -r /home/ec2-user/requirements.txt",
-      "sudo bash /home/ec2-user/sqlite.sh"
+      "sudo bash /home/ec2-user/sqlite.sh",
       "sudo sudo chmod +x /home/ec2-user/npm-node.sh",
       "sudo bash /home/ec2-user/npm-node.sh",
     ]
