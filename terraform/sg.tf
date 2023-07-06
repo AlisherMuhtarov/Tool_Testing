@@ -6,7 +6,7 @@
         from_port        = var.ports[2]
         to_port          = var.ports[2]
         protocol         = var.protocol[1]
-        cidr_blocks      = [output.my_ip]
+        cidr_blocks      = [cidrhost(data.aws_ip_ranges.current.prefixes[0].ip_prefix, 0)]
     }
 
     egress {
