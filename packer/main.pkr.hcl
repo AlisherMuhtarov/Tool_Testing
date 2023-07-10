@@ -79,8 +79,7 @@ build {
       "sudo bash /home/ec2-user/sqlite.sh",
       "sudo sudo chmod +x /home/ec2-user/npm-node.sh",
       "sudo bash /home/ec2-user/npm-node.sh",
-      "cd /home/ec2-user/python-pycone",
-      "pc init && pc run"
+      "cd /home/ec2-user/python-pycone"
     ]
   }
 }
