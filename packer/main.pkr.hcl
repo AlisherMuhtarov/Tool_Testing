@@ -67,19 +67,24 @@ build {
     destination = "/home/ec2-user/python-pycone"
   }
 
+  provisioner "file" {
+    source = "/home/ec2-user/AK.service"
+    destination = "/etc/systemd/system/AK.service"
+  }
+
   provisioner "shell" {
 
     inline = [
       "sudo yum install git -y",
-      "sudo chmod +x /home/ec2-user/terraform.sh",
-      "sudo bash /home/ec2-user/terraform.sh"
-      "sudo chmod +x /home/ec2-user/python-pip3.sh",
-      "sudo bash /home/ec2-user/python-pip3.sh",
-      "sudo pip3 install -r /home/ec2-user/requirements.txt",
+      "sudo chmod +x /home/ec2-user/terraform.sh /home/ec2-user/python-pip3.sh /home/ec2-user/npm-node.sh /home/ec2-user/sqlite.sh",
+      "sudo bash /home/ec2-user/terraform.sh",
+      "sudo bash /home/ec2-user/python-pip3.sh && sudo pip3 install -r /home/ec2-user/requirements.txt",
       "sudo bash /home/ec2-user/sqlite.sh",
-      "sudo sudo chmod +x /home/ec2-user/npm-node.sh",
       "sudo bash /home/ec2-user/npm-node.sh",
-      "cd /home/ec2-user/python-pycone"
+      "cd /home/ec2-user/python-pycone",
+      "sudo chown root:root /etc/systemd/system/AK.service",
+      "sudo chmod 644 /etc/systemd/system/AK.service",
+      "sudo systemctl daemon-reload && sudo systemctl start AK && sudo systemctl enable AK && sudo systemctl status AK"
     ]
   }
 }

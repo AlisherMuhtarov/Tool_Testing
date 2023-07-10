@@ -1,0 +1,14 @@
+[Unit]
+Description=Pycone Application
+After=network.target
+
+[Service]
+ExecStart=/bin/bash -c 'cd /home/ec2-user/python-pycone && (echo "k" | /usr/local/bin/pc init) && /usr/local/bin/pc run'
+
+WorkingDirectory=/home/ec2-user/python-pycone
+User=root
+Group=root
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
