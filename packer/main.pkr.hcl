@@ -38,6 +38,11 @@ build {
   sources = ["source.amazon-ebs.launching"]
 
   provisioner "file" {
+    source = "terraform.sh"
+    destination = "/home/ec2-user/terraform.sh"
+  }
+
+  provisioner "file" {
     source = "python-pip3.sh"
     destination = "/home/ec2-user/python-pip3.sh"
   }
@@ -57,16 +62,25 @@ build {
     destination = "/home/ec2-user/sqlite.sh"
   }
 
+  provisioner "file" {
+    source = "/home/ec2-user/python-pycone"
+    destination = "/home/ec2-user/python-pycone"
+  }
+
   provisioner "shell" {
 
     inline = [
       "sudo yum install git -y",
+      "sudo chmod +x /home/ec2-user/terraform.sh",
+      "sudo bash /home/ec2-user/terraform.sh"
       "sudo chmod +x /home/ec2-user/python-pip3.sh",
       "sudo bash /home/ec2-user/python-pip3.sh",
       "sudo pip3 install -r /home/ec2-user/requirements.txt",
       "sudo bash /home/ec2-user/sqlite.sh",
       "sudo sudo chmod +x /home/ec2-user/npm-node.sh",
       "sudo bash /home/ec2-user/npm-node.sh",
+      "cd /home/ec2-user/python-pycone",
+      "pc init && pc run"
     ]
   }
 }
