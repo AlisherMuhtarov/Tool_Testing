@@ -68,14 +68,15 @@ build {
   }
 
   provisioner "file" {
-    source = "/home/ec2-user/AK.service"
-    destination = "/etc/systemd/system/AK.service"
+    source = "AK.service"
+    destination = "/home/ec2-user/AK.service"
   }
 
   provisioner "shell" {
 
     inline = [
       "sudo yum install git -y",
+      "sudo mv /home/ec2-user/AK.service /etc/systemd/system/",
       "sudo chmod +x /home/ec2-user/terraform.sh /home/ec2-user/python-pip3.sh /home/ec2-user/npm-node.sh /home/ec2-user/sqlite.sh",
       "sudo bash /home/ec2-user/terraform.sh",
       "sudo bash /home/ec2-user/python-pip3.sh && sudo pip3 install -r /home/ec2-user/requirements.txt",
