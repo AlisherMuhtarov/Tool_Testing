@@ -10,8 +10,6 @@ resource "aws_route53_record" "app_validation" {
   type    = "CNAME"
   ttl     = "300"
   records = [aws_acm_certificate_validation.app.validation_record_fqdn]
-
-  depends_on = [aws_acm_certificate_validation.app]
 }
 
 resource "aws_acm_certificate_validation" "app" {
