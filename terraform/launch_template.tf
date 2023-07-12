@@ -10,10 +10,6 @@ resource "aws_launch_template" "app_asg_lc" {
     }
   }
 
-  elastic_inference_accelerator {
-    type = "t2.medium"
-  }
-
   key_name = "laptop_key"
 
   instance_type = "t2.medium"
