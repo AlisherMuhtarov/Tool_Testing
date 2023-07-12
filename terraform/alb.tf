@@ -17,9 +17,3 @@ resource "aws_lb" "app" {
   }
 }
 
-
-resource "aws_lb_target_group_attachment" "attach" {
-  target_group_arn = aws_lb_target_group.app.arn
-  target_id        = aws_lb.app.arn_suffix
-  port             = 80
-}
