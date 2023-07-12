@@ -3,9 +3,9 @@
     description = "Allow SSH inbound traffic"
 
     ingress {
-        from_port        = var.ports[2]
-        to_port          = var.ports[2]
-        protocol         = var.protocol[1]
+        from_port        = var.ports[5]
+        to_port          = var.ports[5]
+        protocol         = var.protocol[-1]
         cidr_blocks      = [var.cidrs[1]]
     }
 

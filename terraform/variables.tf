@@ -13,7 +13,7 @@ variable "env" {
 variable "ports" {
     type = list(string)
     description = "This is an instance type for EC2 instances"
-    default = [ "0", "-1", "22", "80", "443", "3306" ]
+    default = [ "0", "-1", "22", "80", "443", "3000", "3306" ]
 }
 
 variable "protocol" {

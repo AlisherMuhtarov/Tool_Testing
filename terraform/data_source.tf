@@ -4,7 +4,7 @@ data "aws_ami" "ec2_launch" {
 
   filter {
     name   = "name"
-    values = ["ami_requirements*"]
+    values = ["ami_requirements.v5*"]
   }
 
   filter {
@@ -14,6 +14,6 @@ data "aws_ami" "ec2_launch" {
 
   filter {
     name   = "virtualization-type"
-    values = ["hvm"]
+    values = ["hvm"]  
   }
 }
