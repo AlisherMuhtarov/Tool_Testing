@@ -15,6 +15,12 @@ nvm install 18.14.0
 # Set Node.js version 18.14.0 as the active version
 nvm use 18.14.0
 
+# Create a symbolic link for the node binary
+ln -s /root/.nvm/versions/node/v18.14.0/bin/node /usr/local/bin/node
+
+# Add the export PATH line to the last line of .bashrc in ec2-user directory
+echo 'export PATH="/root/.nvm/versions/node/v18.14.0/bin:$PATH"' >> /home/ec2-user/.bashrc
+
 # Install npm version 8.6.0 globally using the newly installed Node.js
 npm install -g npm@8.6.0
 
