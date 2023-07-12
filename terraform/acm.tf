@@ -2,9 +2,6 @@ resource "aws_acm_certificate" "app" {
   domain_name       = "virmzi.de"
   validation_method = "DNS"
 
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 resource "aws_route53_record" "app_validation" {
