@@ -25,7 +25,6 @@ resource "aws_launch_template" "app_asg_lc" {
   network_interfaces {
     associate_public_ip_address = true
     security_groups = [ aws_security_group.main_sg.id ]
-    vpc_security_group_ids = [ aws_security_group.main_sg.id ]
   }
 
   placement {
