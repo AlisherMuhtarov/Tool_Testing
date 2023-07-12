@@ -1,4 +1,4 @@
-resource "aws_lb" "test" {
+resource "aws_lb" "app" {
   name               = "test-lb-tf"
   internal           = false
   load_balancer_type = "application"
@@ -15,4 +15,11 @@ resource "aws_lb" "test" {
   tags = {
     Environment = "production"
   }
+}
+
+
+resource "aws_lb_target_group_attachment" "attach" {
+  target_group_arn = aws_lb_target_group.app.arn
+  target_id        = aws_lb.app.arn
+  port             = 80
 }
