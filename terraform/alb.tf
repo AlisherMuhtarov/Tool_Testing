@@ -6,7 +6,7 @@ resource "aws_lb" "app" {
   subnets            = ["subnet-098ab2c379f487d8e", "subnet-00c67e8302ea518f9", "subnet-01b15e0262af666eb"]
   
   ip_address_type = "ipv4"
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
   access_logs {
     bucket = "elb-access-log-terraform-dump"
