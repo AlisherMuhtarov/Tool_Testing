@@ -25,7 +25,7 @@ resource "aws_launch_template" "app_asg_lc" {
     availability_zone = "us-east-1a"
   }
 
-  security_groups = [ aws_security_group.main_sg.id ]
+  vpc_security_group_ids = [ aws_security_group.main_sg.id ]
   tag_specifications {
     resource_type = "instance"
 
