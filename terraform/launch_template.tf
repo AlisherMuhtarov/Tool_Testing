@@ -1,5 +1,6 @@
 resource "aws_launch_template" "app_asg_lc" {
-  name = "APP_ASG_LC"
+  name = "APP_ASG_LC"   
+  description = "LC for webserver application"
 
   block_device_mappings {
     device_name = "/dev/xvda"
@@ -7,6 +8,10 @@ resource "aws_launch_template" "app_asg_lc" {
     ebs {
       volume_size = 8
     }
+  }
+
+  elastic_inference_accelerator {
+    type = "t2.medium"
   }
 
   key_name = "laptop_key"
