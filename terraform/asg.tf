@@ -1,4 +1,4 @@
-resource "aws_autoscaling_group" "bar" {
+resource "aws_autoscaling_group" "app" {
   availability_zones = ["us-east-1a"]
   desired_capacity   = 1
   max_size           = 1
