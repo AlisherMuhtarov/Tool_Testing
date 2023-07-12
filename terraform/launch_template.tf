@@ -15,7 +15,7 @@ resource "aws_launch_template" "app_asg_lc" {
 
   image_id = data.aws_ami.ec2_launch.id
 
-  instance_initiated_shutdown_behavior = "spot"
+  instance_initiated_shutdown_behavior = "stop"
 
   network_interfaces {
     associate_public_ip_address = true
