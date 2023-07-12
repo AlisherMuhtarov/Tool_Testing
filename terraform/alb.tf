@@ -19,11 +19,13 @@ resource "aws_lb" "app" {
 
 resource "aws_lb_listener" "app" {
   load_balancer_arn = aws_lb.app.arn
-  port              = 80
-  protocol          = "HTTP"
+  port              = 443
+  protocol          = "HTTPS"
 
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.app.arn
   }
+  ssl_policy      = "ELBSecurityPolicy-2016-08"  # Specify the SSL policy to use
+  certificate_arn = "<your_certificate_arn>"    # Replace with the ARN of your SSL certificate
 }
