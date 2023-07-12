@@ -8,7 +8,7 @@ resource "aws_acm_certificate" "app" {
 }
 
 resource "aws_route53_record" "app_validation" {
-  zone_id = "<your_route53_zone_id>"
+  zone_id = "Z021882324FAK648HPE4P"
   name    = "_acme-challenge.virmzi.de"
   type    = "CNAME"
   ttl     = "300"
