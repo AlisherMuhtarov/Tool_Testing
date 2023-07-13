@@ -17,3 +17,8 @@ data "aws_ami" "ec2_launch" {
     values = ["hvm"]  
   }
 }
+
+data "aws_route53_zone" "app" {
+  name         = "virmzi.de"
+  private_zone = false
+}
