@@ -27,5 +27,5 @@ resource "aws_lb_listener" "app" {
     target_group_arn = aws_lb_target_group.app.arn
   }
   ssl_policy      = "ELBSecurityPolicy-TLS13-1-2-2021-06" # Specify the SSL policy to use
-  certificate_arn = aws_acm_certificate.app.arn           # Use the ARN of the ACM certificate
+  certificate_arn = aws_acm_certificate_validation.app.certificate_arn        # Use the ARN of the ACM certificate
 }
