@@ -75,6 +75,8 @@ build {
   provisioner "shell" {
 
     inline = [
+      "sudo mkdir -p /var/log/myapp",
+      "sudo touch /var/log/myapp/output.log && sudo touch /var/log/myapp/error.log",
       "sudo yum install git -y",
       "sudo mv /home/ec2-user/AK.service /etc/systemd/system/",
       "sudo chmod +x /home/ec2-user/terraform.sh /home/ec2-user/python-pip3.sh /home/ec2-user/npm-node.sh /home/ec2-user/sqlite.sh",
@@ -83,9 +85,9 @@ build {
       "sudo bash /home/ec2-user/sqlite.sh",
       "sudo bash /home/ec2-user/npm-node.sh",
       "cd /home/ec2-user/python-pycone",
-      "sudo chown root:root /etc/systemd/system/AK.service",
+      "sudo chown root:root /etc/systemd/system/AK.service && sudo chown root:root /var/log/myapp/output.log && sudo chown root:root /var/log/myapp/error.log",
       "sudo chmod 644 /etc/systemd/system/AK.service",
-      "sudo systemctl daemon-reload && sudo systemctl start AK && sudo systemctl enable AK && sudo systemctl status AK"
+      "sudo systemctl daemon-reload && sudo systemctl start AK && sudo systemctl enable AK && sudo systemctl restart AK"
     ]
   }
 }
