@@ -6,7 +6,7 @@ resource "aws_acm_certificate" "app" {
 
 resource "aws_route53_record" "alb_record" {
   zone_id = "Z021882324FAK648HPE4P"
-  name    = "virmzi.de"
+  name    = "www.virmzi.de"
   type    = "A"
   alias {
     name                   = aws_lb.app.dns_name
