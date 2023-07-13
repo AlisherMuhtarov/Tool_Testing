@@ -34,8 +34,6 @@ resource "aws_route53_record" "alb_record" {
 }
 
 resource "aws_acm_certificate_validation" "app" {
-  certificate_arn = "${aws_acm_certificate.app.arn}"
-  validation_record_fqdns = [
-    "${aws_route53_record.app.fqdn}",
-  ]
+  certificate_arn         = aws_acm_certificate.app.arn
+  validation_record_fqdns = [for record in aws_route53_record.app : record.fqdn]
 }
