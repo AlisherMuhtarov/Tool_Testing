@@ -1,5 +1,5 @@
 resource "aws_security_group" "ec2_sg" {
-  name        = "main"
+  name        = "ec2_sg"
   description = "Allow SSH inbound traffic"
 
   ingress {
@@ -33,7 +33,7 @@ resource "aws_security_group" "ec2_sg" {
 }
 
 resource "aws_security_group" "lb_sg" {
-  name        = "main"
+  name        = "lb_sg"
   description = "Allow SSH inbound traffic"
 
   ingress {
