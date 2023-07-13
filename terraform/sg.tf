@@ -58,7 +58,7 @@ resource "aws_security_group_rule" "ec2_to_alb" {
   to_port           = var.ports[5]
   protocol          = var.protocol[1]
   cidr_blocks       = [var.cidrs[1]]
-  security_group_id = [aws_security_group.ec2_sg.id]
+  security_group_id = aws_security_group.ec2_sg.id
 }
 
 resource "aws_security_group_rule" "ec2_to_alb-2" {
@@ -67,14 +67,14 @@ resource "aws_security_group_rule" "ec2_to_alb-2" {
   to_port           = var.ports[4]
   protocol          = var.protocol[1]
   cidr_blocks       = [var.cidrs[1]]
-  security_group_id = [aws_security_group.ec2_sg.id]
+  security_group_id = aws_security_group.ec2_sg.id
 }
 
 resource "aws_security_group_rule" "alb_to_ec2" {
     type = "ingress"
     from_port   = var.ports[5]
     to_port     = var.ports[5]
-    security_groups = [aws_security_group.alb_sg.id]
+    security_groups = aws_security_group.alb_sg.id
     protocol    = var.protocol[1]
     cidr_blocks = [var.cidrs[1]]
   }
@@ -82,7 +82,7 @@ resource "aws_security_group_rule" "alb_to_ec2" {
 resource "aws_security_group_rule" "alb_to_ec2-2" {
     from_port   = var.ports[3]
     to_port     = var.ports[3]
-    security_groups = [aws_security_group.alb_sg.id]
+    security_groups = aws_security_group.alb_sg.id
     protocol    = var.protocol[1]
     cidr_blocks = [var.cidrs[0]]
 }
