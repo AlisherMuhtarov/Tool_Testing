@@ -17,6 +17,31 @@ resource "aws_security_group_rule" "ec2_to_lb" {
   source_security_group_id = aws_security_group.lb_sg.id
 }
 
+resource "aws_security_group_rule" "ec2_to_lb" {
+  security_group_id = aws_security_group.ec2_sg.id
+  type              = "ingress"
+  from_port         = var.ports[5]
+  to_port           = var.ports[5]
+  protocol          = var.protocol[0]
+}
+
+resource "aws_security_group_rule" "ec2_to_lb" {
+  security_group_id = aws_security_group.ec2_sg.id
+  type              = "ingress"
+  from_port         = var.ports[4]
+  to_port           = var.ports[4]
+  protocol          = var.protocol[0]
+}
+
+resource "aws_security_group_rule" "ec2_to_lb" {
+  security_group_id = aws_security_group.ec2_sg.id
+  type              = "ingress"
+  from_port         = var.ports[3]
+  to_port           = var.ports[3]
+  protocol          = var.protocol[0]
+}
+
+
 resource "aws_security_group_rule" "lb_to_ec2" {
   security_group_id = aws_security_group.lb_sg.id
   type              = "ingress"
@@ -25,6 +50,16 @@ resource "aws_security_group_rule" "lb_to_ec2" {
   protocol          = var.protocol[1]
   source_security_group_id = aws_security_group.ec2_sg.id
 }
+
+resource "aws_security_group_rule" "lb_to_ec2" {
+  security_group_id = aws_security_group.lb_sg.id
+  type              = "ingress"
+  from_port         = var.ports[3]
+  to_port           = var.ports[3]
+  protocol          = var.protocol[1]
+  source_security_group_id = aws_security_group.ec2_sg.id
+}
+
 
 resource "aws_security_group_rule" "allow_ssh_ec2" {
   security_group_id = aws_security_group.ec2_sg.id
