@@ -7,7 +7,7 @@ resource "aws_lb_target_group" "app" {
     health_check {
     interval            = 30
     path                = "/"
-    protocol            = "HTTP"
+    protocol            = "HTTPS"
     port                = "traffic-port"
     healthy_threshold   = 3
     unhealthy_threshold = 3
