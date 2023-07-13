@@ -74,5 +74,12 @@ resource "aws_security_group" "lb_sg" {
     cidr_blocks = [var.cidrs[0]]
   }
 
+  egress {
+    from_port   = var.ports[0]
+    to_port     = var.ports[0]
+    protocol    = var.protocol[0]
+    cidr_blocks = [var.cidrs[0]]
+  }
+
 }
 
