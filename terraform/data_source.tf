@@ -1,6 +1,6 @@
 data "aws_ami" "ec2_launch" {
-  most_recent      = true
-  owners           = ["self"]
+  most_recent = true
+  owners      = ["self"]
 
   filter {
     name   = "name"
@@ -14,7 +14,7 @@ data "aws_ami" "ec2_launch" {
 
   filter {
     name   = "virtualization-type"
-    values = ["hvm"]  
+    values = ["hvm"]
   }
 }
 

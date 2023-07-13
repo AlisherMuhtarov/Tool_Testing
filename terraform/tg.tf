@@ -4,7 +4,7 @@ resource "aws_lb_target_group" "app" {
   protocol = "HTTP"
   vpc_id   = "vpc-0c5d61951cc331de6"
 
-    health_check {
+  health_check {
     interval            = 30
     path                = "/"
     protocol            = "HTTPS"
