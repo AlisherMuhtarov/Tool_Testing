@@ -21,7 +21,7 @@ resource "aws_route53_record" "app" {
   zone_id         = data.aws_route53_zone.app.zone_id
 }
 
-resource "aws_acm_certificate_validation" "hello_cert_validate" {
-  certificate_arn = aws_acm_certificate.app.arn
-  validation_record_fqdns = [aws_route53_record.alb_record.fqdn]
+resource "aws_acm_certificate_validation" "example" {
+  certificate_arn         = aws_acm_certificate.app.arn
+  validation_record_fqdns = [for record in aws_route53_record.app : record.fqdn]
 }
