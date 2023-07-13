@@ -1,6 +1,11 @@
 resource "aws_acm_certificate" "app" {
-  domain_name       = "www.virmzi.de"
+  domain_name       = "virmzi.de"
   validation_method = "DNS"
+
+  validation_option {
+    domain_name = "www.virmzi.de"
+    validation_domain = "virmzi.de"
+  }
 
 }
 
