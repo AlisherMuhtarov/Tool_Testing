@@ -4,7 +4,7 @@ data "aws_ami" "ec2_launch" {
 
   filter {
     name   = "name"
-    values = ["ami_requirements.v5*"]
+    values = ["ami_requirements.v6*"]
   }
 
   filter {
