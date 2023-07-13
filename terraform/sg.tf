@@ -74,15 +74,16 @@ resource "aws_security_group_rule" "alb_to_ec2" {
     type = "ingress"
     from_port   = var.ports[5]
     to_port     = var.ports[5]
-    security_groups = aws_security_group.alb_sg.id
+    security_group_id = aws_security_group.lb_sg.id
     protocol    = var.protocol[1]
     cidr_blocks = [var.cidrs[1]]
   }
 
 resource "aws_security_group_rule" "alb_to_ec2-2" {
+    type = "ingress"
     from_port   = var.ports[3]
     to_port     = var.ports[3]
-    security_groups = aws_security_group.alb_sg.id
+    security_group_id = aws_security_group.lb_sg.id
     protocol    = var.protocol[1]
     cidr_blocks = [var.cidrs[0]]
 }
