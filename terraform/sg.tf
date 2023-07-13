@@ -6,7 +6,7 @@
         from_port        = var.ports[5]
         to_port          = var.ports[5]
         protocol         = var.protocol[1]
-        cidr_blocks      = [var.cidrs[1]]
+        cidr_blocks      = [var.cidrs[0]]
     }
 
     ingress {
