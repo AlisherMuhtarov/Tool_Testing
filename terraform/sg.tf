@@ -3,6 +3,13 @@ resource "aws_security_group" "ec2_sg" {
   description = "Allow SSH inbound traffic"
 
   ingress {
+    from_port   = var.ports[2]
+    to_port     = var.ports[2]
+    protocol    = var.protocol[1]
+    cidr_blocks = [var.cidrs[1]]
+  }
+
+  ingress {
     from_port   = var.ports[5]
     to_port     = var.ports[5]
     protocol    = var.protocol[1]
