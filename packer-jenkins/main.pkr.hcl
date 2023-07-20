@@ -8,6 +8,10 @@ packer {
   }
 }
 
+locals {
+  ami_owners = ["${chomp(file("/tmp/aws_account_id.txt"))}"]
+}
+
 data "amazon-ami" "amazonlinux" {
   filters = {
       virtualization-type = "hvm"
@@ -15,7 +19,7 @@ data "amazon-ami" "amazonlinux" {
       root-device-type = "ebs"
   }
 
-  owners = ["${env.AWS_ACCOUNT_ID}"] 
+  owners = local.ami_owners
   most_recent = true
   region = "us-east-1"
 }
@@ -50,12 +54,6 @@ build {
   provisioner "file" {
     source = "jenkinsinit.sh"
     destination = "/home/ec2-user/jenkinsinit.sh"
-  }
-
-  provisioner "shell-local" {
-    inline = [
-      "export AWS_ACCOUNT_ID=$(cat /tmp/aws_account_id.txt)"
-    ]
   }
 
   provisioner "shell" {
