@@ -57,13 +57,19 @@ build {
     destination = "/home/ec2-user/jenkinsinit.sh"
   }
 
+  provisioner "file" {
+    source = "jenkinsinit.sh"
+    destination = "/home/ec2-user/installing-jenkins-plugins.sh"
+  }
+
   provisioner "shell" {
 
     inline = [
-      "sudo chmod +x /home/ec2-user/terraform.sh /home/ec2-user/python-pip3.sh /home/ec2-user/jenkinsinit.sh",
+      "sudo chmod +x /home/ec2-user/terraform.sh /home/ec2-user/python-pip3.sh /home/ec2-user/jenkinsinit.sh /home/ec2-user/installing-jenkins-plugins.sh",
       "sudo bash /home/ec2-user/terraform.sh",
       "sudo bash /home/ec2-user/python-pip3.sh",
-      "sudo bash /home/ec2-user/jenkinsinit.sh"
+      "sudo bash /home/ec2-user/jenkinsinit.sh",
+      "sudo bash /home/ec2-user/installing-jenkins-plugins.sh"
     ]
   }
 }
