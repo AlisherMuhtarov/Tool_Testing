@@ -59,7 +59,7 @@ build {
   provisioner "shell" {
 
     inline = [
-      "sudo chmod +x /home/ec2-user/terraform.sh /home/ec2-user/python-pip3.sh" "/home/ec2-user/jenkinsinit.sh",
+      "sudo chmod +x /home/ec2-user/terraform.sh /home/ec2-user/python-pip3.sh /home/ec2-user/jenkinsinit.sh",
       "sudo bash /home/ec2-user/terraform.sh",
       "sudo bash /home/ec2-user/python-pip3.sh",
       "sudo bash /home/ec2-user/jenkinsinit.sh"
