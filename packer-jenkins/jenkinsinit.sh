@@ -7,7 +7,7 @@ password=$(sudo cat /var/lib/jenkins/secrets/initialAdminPassword)
 
 # NEW ADMIN CREDENTIALS URL ENCODED USING PYTHON
 username=$(python3 -c "import urllib.parse; print(urllib.parse.quote(input(), safe=''))" <<< "admin")
-new_password=$(python3 -c "import urllib.parse; print(urllib.parse.quote(input(), safe=''))" <<< "jenkins123!")
+new_password=$(python3 -c "import urllib.parse; print(urllib.parse.quote(input(), safe=''))" <<< "$jp")
 fullname=$(python3 -c "import urllib.parse; print(urllib.parse.quote(input(), safe=''))" <<< "admin root")
 email=$(python3 -c "import urllib.parse; print(urllib.parse.quote(input(), safe=''))" <<< "hello@world.com")
 
