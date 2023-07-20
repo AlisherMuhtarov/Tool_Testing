@@ -8,10 +8,6 @@ packer {
   }
 }
 
-locals {
-  aws_account_id = file("/tmp/aws_account_id.txt")
-}
-
 data "amazon-ami" "amazonlinux" {
   filters = {
       virtualization-type = "hvm"
@@ -58,8 +54,6 @@ build {
 
   provisioner "shell-local" {
     inline = [
-      "chmod +x /home/ec2-user/terraform.sh /home/ec2-user/python-pip3.sh /home/ec2-user/jenkinsinit.sh",
-      "/home/ec2-user/jenkinsinit.sh",
       "export AWS_ACCOUNT_ID=$(cat /tmp/aws_account_id.txt)"
     ]
   }
