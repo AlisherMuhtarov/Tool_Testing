@@ -19,7 +19,7 @@ data "amazon-ami" "amazonlinux" {
       root-device-type = "ebs"
   }
 
-  owners = [local.aws_account_id] 
+  owners = [provisioner.shell-local.AWS_ACCOUNT_ID] 
   most_recent = true
   region = "us-east-1"
 }
@@ -57,7 +57,11 @@ build {
   }
 
   provisioner "shell-local" {
-    inline = ["export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query \"Account\" --output text) && echo $AWS_ACCOUNT_ID > /tmp/aws_account_id.txt"]
+    inline = [
+      "chmod +x /home/ec2-user/terraform.sh /home/ec2-user/python-pip3.sh /home/ec2-user/jenkinsinit.sh",
+      "/home/ec2-user/jenkinsinit.sh",
+      "export AWS_ACCOUNT_ID=$(cat /tmp/aws_account_id.txt)"
+    ]
   }
 
   provisioner "shell" {
