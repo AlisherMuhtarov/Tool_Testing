@@ -47,47 +47,13 @@ build {
     destination = "/home/ec2-user/python-pip3.sh"
   }
 
-  provisioner "file" {
-    source = "requirements.txt"
-    destination = "/home/ec2-user/requirements.txt"
-  }
-
-  provisioner "file" {
-    source = "npm-node.sh"
-    destination = "/home/ec2-user/npm-node.sh"
-  }
-
-  provisioner "file" {
-    source = "sqlite3.sh"
-    destination = "/home/ec2-user/sqlite.sh"
-  }
-
-  provisioner "file" {
-    source = "/home/ec2-user/python-pycone"
-    destination = "/home/ec2-user/python-pycone"
-  }
-
-  provisioner "file" {
-    source = "AK.service"
-    destination = "/home/ec2-user/AK.service"
-  }
-
   provisioner "shell" {
 
     inline = [
-      "sudo mkdir -p /var/log/myapp",
-      "sudo touch /var/log/myapp/output.log && sudo touch /var/log/myapp/error.log",
-      "sudo yum install git -y",
-      "sudo mv /home/ec2-user/AK.service /etc/systemd/system/",
-      "sudo chmod +x /home/ec2-user/terraform.sh /home/ec2-user/python-pip3.sh /home/ec2-user/npm-node.sh /home/ec2-user/sqlite.sh",
+      "sudo chmod +x /home/ec2-user/terraform.sh /home/ec2-user/python-pip3.sh",
       "sudo bash /home/ec2-user/terraform.sh",
-      "sudo bash /home/ec2-user/python-pip3.sh && sudo pip3 install -r /home/ec2-user/requirements.txt",
-      "sudo bash /home/ec2-user/sqlite.sh",
-      "sudo bash /home/ec2-user/npm-node.sh",
+      "sudo bash /home/ec2-user/python-pip3.sh",
       "cd /home/ec2-user/python-pycone",
-      "sudo chown root:root /etc/systemd/system/AK.service && sudo chown root:root /var/log/myapp/output.log && sudo chown root:root /var/log/myapp/error.log",
-      "sudo chmod 644 /etc/systemd/system/AK.service",
-      "sudo systemctl daemon-reload && sudo systemctl start AK && sudo systemctl enable AK && sudo systemctl restart AK"
     ]
   }
 }
