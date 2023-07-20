@@ -26,7 +26,7 @@ sudo yum upgrade
 sudo dnf install java-11-amazon-corretto -y
 
 # Install Jenkins using yum package manager
-sudo yum install jenkins
+sudo yum install jenkins -y
 
 # Reload systemd to recognize the Jenkins service
 sudo systemctl daemon-reload
