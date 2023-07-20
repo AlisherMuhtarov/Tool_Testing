@@ -31,6 +31,12 @@ sudo yum install jenkins
 # Reload systemd to recognize the Jenkins service
 sudo systemctl daemon-reload
 
+sudo systemctl enable jenkins
+
+sudo systemctl start jenkins
+
+sudo systemctl status jenkins
+
 # Install Git
 sudo yum install git -y
 
