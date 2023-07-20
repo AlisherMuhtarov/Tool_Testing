@@ -52,8 +52,7 @@ build {
     inline = [
       "sudo chmod +x /home/ec2-user/terraform.sh /home/ec2-user/python-pip3.sh",
       "sudo bash /home/ec2-user/terraform.sh",
-      "sudo bash /home/ec2-user/python-pip3.sh",
-      "cd /home/ec2-user/python-pycone",
+      "sudo bash /home/ec2-user/python-pip3.sh"
     ]
   }
 }
