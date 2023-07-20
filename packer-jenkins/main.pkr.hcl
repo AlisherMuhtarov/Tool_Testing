@@ -52,7 +52,7 @@ build {
     destination = "/home/ec2-user/jenkinsinit.sh"
   }
 
-  provisioner "shell-exec" {
+  provisioner "shell-local" {
     inline = ["export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query \"Account\" --output text) && echo $AWS_ACCOUNT_ID > /tmp/aws_account_id.txt"]
   }
 
