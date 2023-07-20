@@ -8,6 +8,10 @@ packer {
   }
 }
 
+locals {
+  aws_account_id = file("/tmp/aws_account_id.txt")
+}
+
 data "amazon-ami" "amazonlinux" {
   filters = {
       virtualization-type = "hvm"
@@ -15,14 +19,14 @@ data "amazon-ami" "amazonlinux" {
       root-device-type = "ebs"
   }
 
-  owners = [""] 
+  owners = [local.aws_account_id] 
   most_recent = true
   region = "us-east-1"
 }
 
 source "amazon-ebs" "launching" {
 
-  ami_name             = "jenkins_ami_requirements{{timestamp}}"
+  ami_name             = "jenkins_ami_requirementsv2{{timestamp}}"
   instance_type        = "t2.micro"
   region               = "us-east-1"
   source_ami           = data.amazon-ami.amazonlinux.id
