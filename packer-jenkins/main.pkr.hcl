@@ -12,6 +12,10 @@ locals {
   ami_owners = ["${chomp(file("/tmp/aws_account_id.txt"))}"]
 }
 
+provisioner "shell-local" {
+  command = "bash /path/to/your/bash_script.sh"
+}
+
 data "amazon-ami" "amazonlinux" {
   filters = {
       virtualization-type = "hvm"
