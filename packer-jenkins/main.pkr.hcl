@@ -8,6 +8,10 @@ packer {
   }
 }
 
+variable "aws_region" {
+  default = env("ID")
+}
+
 data "amazon-ami" "amazonlinux" {
   filters = {
       virtualization-type = "hvm"
@@ -15,7 +19,7 @@ data "amazon-ami" "amazonlinux" {
       root-device-type = "ebs"
   }
 
-  owners = ["${$ID}"]
+  owners = ["${var.aws_region}"]
   most_recent = true
   region = "us-east-1"
 }
