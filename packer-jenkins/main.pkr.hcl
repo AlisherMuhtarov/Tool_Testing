@@ -26,7 +26,7 @@ data "amazon-ami" "amazonlinux" {
 
 source "amazon-ebs" "launching" {
 
-  ami_name             = "jenkins_ami_requirementsv2{{timestamp}}"
+  ami_name             = "jenkins_ami_requirementsv3{{timestamp}}"
   instance_type        = "t2.micro"
   region               = "us-east-1"
   security_group_ids   = ["sg-0ba543c6b5678587a"]
