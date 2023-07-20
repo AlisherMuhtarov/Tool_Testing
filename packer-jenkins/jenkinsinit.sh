@@ -1,7 +1,5 @@
 #! /bin/bash
-ip=$(curl -s http://checkip.amazonaws.com)
-
-url="http://$ip:8080"
+url="$ip:8080"
 
 password=$(sudo cat /var/lib/jenkins/secrets/initialAdminPassword)
 
