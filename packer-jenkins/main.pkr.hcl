@@ -53,7 +53,7 @@ build {
   }
 
   provisioner "shell-exec" {
-    inline = "export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query \"Account\" --output text) && echo $AWS_ACCOUNT_ID > /tmp/aws_account_id.txt"
+    inline = ["export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query \"Account\" --output text) && echo $AWS_ACCOUNT_ID > /tmp/aws_account_id.txt"]
   }
 
   provisioner "shell" {
