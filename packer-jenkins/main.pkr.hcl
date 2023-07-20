@@ -15,7 +15,7 @@ data "amazon-ami" "amazonlinux" {
       root-device-type = "ebs"
   }
 
-  owners = [provisioner.shell-local.AWS_ACCOUNT_ID] 
+  owners = ["${env.AWS_ACCOUNT_ID}"] 
   most_recent = true
   region = "us-east-1"
 }
