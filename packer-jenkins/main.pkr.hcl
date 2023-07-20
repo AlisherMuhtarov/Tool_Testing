@@ -8,14 +8,6 @@ packer {
   }
 }
 
-locals {
-  ami_owners = ["${chomp(file("/tmp/aws_account_id.txt"))}"]
-}
-
-provisioner "shell-local" {
-  command = "bash /path/to/your/bash_script.sh"
-}
-
 data "amazon-ami" "amazonlinux" {
   filters = {
       virtualization-type = "hvm"
@@ -23,7 +15,7 @@ data "amazon-ami" "amazonlinux" {
       root-device-type = "ebs"
   }
 
-  owners = local.ami_owners
+  owners = ["${$ID}"]
   most_recent = true
   region = "us-east-1"
 }
