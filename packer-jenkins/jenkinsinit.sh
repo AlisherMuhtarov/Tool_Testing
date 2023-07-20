@@ -1,12 +1,15 @@
 #! /bin/bash
-url=http://ip/:8080
+ip=$(curl -s http://checkip.amazonaws.com)
+
+url="http://$ip:8080"
+
 password=$(sudo cat /var/lib/jenkins/secrets/initialAdminPassword)
 
 # NEW ADMIN CREDENTIALS URL ENCODED USING PYTHON
-username=$(python -c "import urllib;print urllib.quote(raw_input(), safe='')" <<< "admin")
-new_password=$(python -c "import urllib;print urllib.quote(raw_input(), safe='')" <<< "jenkins123!")
-fullname=$(python -c "import urllib;print urllib.quote(raw_input(), safe='')" <<< "admin root")
-email=$(python -c "import urllib;print urllib.quote(raw_input(), safe='')" <<< "hello@world.com")
+username=$(python3 -c "import urllib.parse; print(urllib.parse.quote(input(), safe=''))" <<< "admin")
+new_password=$(python3 -c "import urllib.parse; print(urllib.parse.quote(input(), safe=''))" <<< "jenkins123!")
+fullname=$(python3 -c "import urllib.parse; print(urllib.parse.quote(input(), safe=''))" <<< "admin root")
+email=$(python3 -c "import urllib.parse; print(urllib.parse.quote(input(), safe=''))" <<< "hello@world.com")
 
 # GET THE CRUMB AND COOKIE
 cookie_jar="$(mktemp)"
