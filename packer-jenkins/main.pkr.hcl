@@ -19,7 +19,7 @@ data "amazon-ami" "amazonlinux" {
       root-device-type = "ebs"
   }
 
-  owners = ["${var.aws_region}"]
+  owners = [${var.aws_region}]
   most_recent = true
   region = "us-east-1"
 }
