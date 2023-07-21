@@ -66,7 +66,7 @@ build {
   provisioner "shell" {
 
     inline = [
-      "sudo export ip=$(aws ec2 describe-instances --instance-ids i-01b1d1cb86b761087 --query 'Reservations[0].Instances[0].PublicDnsName' --output text)",
+      "export ip=$(aws ec2 describe-instances --instance-ids i-01b1d1cb86b761087 --query 'Reservations[0].Instances[0].PublicDnsName' --output text) jp=jenkins123!",
       "sudo echo $ip",
       "sudo chmod +x /home/ec2-user/terraform.sh /home/ec2-user/python-pip3.sh /home/ec2-user/jenkinsinit.sh /home/ec2-user/installing-jenkins-plugins.sh",
       "sudo bash /home/ec2-user/terraform.sh",
