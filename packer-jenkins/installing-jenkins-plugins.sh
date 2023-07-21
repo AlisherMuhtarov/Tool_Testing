@@ -3,7 +3,7 @@
 # Jenkins Server Configuration
 url=$ip:8080
 user=admin
-password=jenkins123!
+password=$jp
 
 # Get Jenkins Crumb and Cookie
 cookie_jar="$(mktemp)"

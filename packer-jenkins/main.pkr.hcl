@@ -28,6 +28,7 @@ source "amazon-ebs" "launching" {
 
   ami_name             = "jenkins_ami_requirements.v5{{timestamp}}"
   instance_type        = "t2.micro"
+  iam_instance_profile = "Terraform-Server-Role"
   region               = "us-east-1"
   security_group_ids   = ["sg-0ba543c6b5678587a"]
   source_ami           = data.amazon-ami.amazonlinux.id
@@ -65,6 +66,8 @@ build {
   provisioner "shell" {
 
     inline = [
+      "ip=$(aws ec2 describe-instances --instance-ids i-01b1d1cb86b761087 --query 'Reservations[0].Instances[0].PublicDnsName' --output text)",
+      "echo $ip",
       "sudo chmod +x /home/ec2-user/terraform.sh /home/ec2-user/python-pip3.sh /home/ec2-user/jenkinsinit.sh /home/ec2-user/installing-jenkins-plugins.sh",
       "sudo bash /home/ec2-user/terraform.sh",
       "sudo bash /home/ec2-user/python-pip3.sh",
