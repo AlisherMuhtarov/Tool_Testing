@@ -26,7 +26,7 @@ data "amazon-ami" "amazonlinux" {
 
 source "amazon-ebs" "launching" {
 
-  ami_name             = "jenkins_ami_requirements.v5{{timestamp}}"
+  ami_name             = "jenkins_ami_requirements.v3{{timestamp}}"
   instance_type        = "t2.micro"
   iam_instance_profile = "Terraform-Server-Role"
   region               = "us-east-1"
