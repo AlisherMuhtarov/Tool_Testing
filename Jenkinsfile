@@ -1,16 +1,14 @@
 pipeline {
-    agent none
+    agent any
     stages {
-        dir('terraform')
         stage('terraform init') {
-            agent any
-            options {
-                // Timeout counter starts BEFORE agent is allocated
-                timeout(time: 1, unit: 'SECONDS')
-            }
             steps {
-                echo 'Hello World'
-                echo 'testin'
+                // Change to the desired directory
+                dir('terraform') {
+                    // Run your commands in the specified directory
+                    sh 'echo test'
+                    // Add more commands if needed
+                }
             }
         }
     }
