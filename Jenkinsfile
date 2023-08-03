@@ -1,7 +1,7 @@
 pipeline {
     agent none
     stages {
-        dir(terraform)
+        dir('terraform')
         stage('terraform init') {
             agent any
             options {
