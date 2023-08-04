@@ -26,7 +26,7 @@ pipeline {
                 // Change to the desired directory
                 dir('terraform') {
                     // Run your commands in the specified directory
-                    sh 'terraform apply'
+                    sh 'terraform apply -auto-approve'
                     // Add more commands if needed
                 }
             }
