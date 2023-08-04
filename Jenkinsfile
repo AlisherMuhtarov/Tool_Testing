@@ -14,11 +14,17 @@ pipeline {
                 }
             }
         }
-        stage('terraform plan') {
+        stage('packer build') {
             steps {
-                dir('terraform') {
-                    sh "sed -i 's/ami_requirements.v9/${params.AMI_NAME}/g' data_source.tf"
-                    sh 'terraform plan'
+                dir('packer') {
+                    script {
+                        def packerOutput = sh(script: 'packer build main.pkr.hcl', returnStdout: true)
+                        def amiNameMatch = packerOutput =~ /ami_name = "ami_requirements\.(\w+)"/
+                        if (amiNameMatch) {
+                            env.AMI_NAME = amiNameMatch[0][1]
+                            echo "Found AMI name: ${env.AMI_NAME}"
+                        }
+                    }
                 }
             }
         }
@@ -28,13 +34,12 @@ pipeline {
             }
             steps {
                 dir('terraform') {
-                    sh "sed -i 's/ami_requirements.v9/${params.AMI_NAME}/g' data_source.tf"
+                    sh "sed -i 's/ami_requirements.v9/${env.AMI_NAME}/g' data_source.tf"
                     sh 'terraform apply -auto-approve'
                 }
             }
             post {
                 success {
-                    // If 'terraform apply' is successful, set the APPLY_RUN_ONCE to 'yes'
                     always {
                         script {
                             env.APPLY_RUN_ONCE = 'yes'
@@ -44,6 +49,9 @@ pipeline {
             }
         }
         stage('terraform taint') {
+            when {
+                expression { return env.APPLY_RUN_ONCE == 'yes' }
+            }
             steps {
                 dir('terraform') {
                     sh 'terraform taint aws_launch_template.app_asg_lc'
