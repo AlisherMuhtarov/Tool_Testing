@@ -24,6 +24,7 @@ pipeline {
                     sh 'terraform plan'
                 }
             }
+        }
         stage('terraform apply') {
             when {
                 expression { return env.APPLY_RUN_ONCE == 'no' }
