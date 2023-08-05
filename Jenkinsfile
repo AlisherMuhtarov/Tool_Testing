@@ -14,20 +14,16 @@ pipeline {
                 }
             }
         }
-        stage('packer build') {
+        stage('terraform plan') {
+            when {
+                expression { return env.APPLY_RUN_ONCE == 'no' }
+            }
             steps {
-                dir('packer') {
-                    script {
-                        def packerOutput = sh(script: 'packer build main.pkr.hcl', returnStdout: true)
-                        def amiNameMatch = packerOutput =~ /ami_name = "ami_requirements\.(\w+)"/
-                        if (amiNameMatch) {
-                            env.AMI_NAME = amiNameMatch[0][1]
-                            echo "Found AMI name: ${env.AMI_NAME}"
-                        }
-                    }
+                dir('terraform') {
+                    sh "sed -i 's/ami_requirements.v9/${env.AMI_NAME}/g' data_source.tf"
+                    sh 'terraform plan'
                 }
             }
-        }
         stage('terraform apply') {
             when {
                 expression { return env.APPLY_RUN_ONCE == 'no' }
