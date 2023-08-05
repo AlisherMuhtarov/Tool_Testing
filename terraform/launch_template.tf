@@ -35,8 +35,4 @@ resource "aws_launch_template" "app_asg_lc" {
     }
   }
 
-  lifecycle {
-    prevent_destroy = true
-  }
-
 }
