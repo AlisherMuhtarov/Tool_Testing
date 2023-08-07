@@ -8,7 +8,7 @@ resource "aws_autoscaling_group" "app" {
     id      = aws_launch_template.app_asg_lc.id
     version = "$Latest"
   }
-  
+
   instance_refresh {
     strategy = "Rolling"
     preferences {
@@ -17,6 +17,10 @@ resource "aws_autoscaling_group" "app" {
     }
     // Depending the triggers you wish to configure, you may not want to include this
     triggers = ["tag"]
+
+    lifecycle {
+      create_before_destroy = true
+    }
   }
 }
 
