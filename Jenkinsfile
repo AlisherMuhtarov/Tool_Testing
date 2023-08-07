@@ -36,6 +36,8 @@ pipeline {
             }
             steps {
                 dir('terraform') {
+                    sh "echo ${env.AMI_NAME}"
+                    sh "echo ${AMI_NAME}"
                     sh "sed -i 's/ami_requirements.v9/${env.AMI_NAME}/g' data_source.tf"
                     sh 'terraform plan'
                 }
