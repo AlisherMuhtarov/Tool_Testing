@@ -8,6 +8,22 @@ pipeline {
         APPLY_RUN_ONCE = 'no'
     }
     stages {
+    stage('Check Previous Build Result') {
+        steps {
+            script {
+                def previousBuildResult = currentBuild.getPreviousBuild()?.getResult()
+                echo "Previous Build Result: ${previousBuildResult}"
+                if (previousBuildResult == 'SUCCESS') {
+                    env.APPLY_RUN_ONCE = 'yes'
+                    echo "Will perform additional 'terraform apply -target=aws_launch_template'"
+                } else if (previousBuildResult == 'ABORTED' || previousBuildResult == 'FAILURE') {
+                    env.APPLY_RUN_ONCE = 'no'
+                    echo "Will perform normal 'terraform apply'"
+                }
+            }
+        }
+    }
+    stages {
         stage('terraform init') {
             steps {
                 dir('terraform') {
@@ -43,6 +59,28 @@ pipeline {
                             env.APPLY_RUN_ONCE = 'yes'
                         }
                     }
+                }
+            }
+        }
+        stage('terraform apply -target=aws_launch_template') {
+            when {
+                expression { return env.APPLY_RUN_ONCE == 'yes' }
+            }
+            steps {
+                dir('terraform') {
+                    sh "sed -i 's/ami_requirements.v9/${env.AMI_NAME}/g' data_source.tf"
+                    sh 'terraform apply -auto-approve -target=aws_launch_template'
+                }
+            }
+        }
+        stage('terraform apply -target=aws_launch_template again') {
+            when {
+                expression { return env.APPLY_RUN_ONCE == 'yes' }
+            }
+            steps {
+                dir('terraform') {
+                    sh "sed -i 's/ami_requirements.v9/${env.AMI_NAME}/g' data_source.tf"
+                    sh 'terraform apply -auto-approve -target=aws_launch_template'
                 }
             }
         }
