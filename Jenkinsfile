@@ -8,6 +8,21 @@ pipeline {
         APPLY_RUN_ONCE = 'no'
     }
     stages {
+        stage('Check Previous Build Result') {
+            steps {
+                script {
+                    def previousBuildResult = currentBuild.getPreviousBuild()?.getResult()
+                    echo "Previous Build Result: ${previousBuildResult}"
+                    if (previousBuildResult == 'SUCCESS') {
+                        env.APPLY_RUN_ONCE = 'yes'
+                        echo "Will perform additional 'terraform apply -target=aws_launch_template'"
+                    } else if (previousBuildResult == 'ABORTED' || previousBuildResult == 'FAILURE') {
+                        env.APPLY_RUN_ONCE = 'no'
+                        echo "Will perform normal 'terraform apply'"
+                    }
+                }
+            }
+        }
         stage('Terraform Init') {
             steps {
                 dir('terraform') {
