@@ -14,6 +14,8 @@ resource "aws_launch_template" "app_asg_lc" {
 
   instance_type = "t2.medium"
 
+  update_default_version = true
+
   image_id = data.aws_ami.ec2_launch.id
 
   instance_initiated_shutdown_behavior = "stop"
