@@ -6,7 +6,7 @@ resource "aws_autoscaling_group" "app" {
 
   launch_template {
     id      = aws_launch_template.app_asg_lc.id
-    version = "$Latest"
+    version = aws_launch_template.app_asg_lc.latest_version
   }
 
   lifecycle {
@@ -15,10 +15,13 @@ resource "aws_autoscaling_group" "app" {
 
   instance_refresh {
     strategy = "Rolling"
-    preferences {
-      min_healthy_percentage = 50
-    }
     triggers = ["tag"]
+  }
+
+  tag {
+    key                 = "launch version"
+    value               = aws_launch_template.app_asg_lc.latest_version
+    propagate_at_launch = true
   }
 }
 
