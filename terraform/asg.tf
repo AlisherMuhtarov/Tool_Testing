@@ -8,6 +8,16 @@ resource "aws_autoscaling_group" "app" {
     id      = aws_launch_template.app_asg_lc.id
     version = "$Latest"
   }
+  
+  instance_refresh {
+    strategy = "Rolling"
+    preferences {
+      // You probably want more than 50% healthy depending on how much headroom you have
+      min_healthy_percentage = 50
+    }
+    // Depending the triggers you wish to configure, you may not want to include this
+    triggers = ["tag"]
+  }
 }
 
 resource "aws_autoscaling_attachment" "asg_attachment" {

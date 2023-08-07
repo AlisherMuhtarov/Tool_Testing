@@ -46,17 +46,6 @@ pipeline {
                 }
             }
         }
-        stage('terraform taint and relaunch') {
-            when {
-                expression { return env.APPLY_RUN_ONCE == 'yes' && !params.TERRAFORM_DESTROY }
-            }
-            steps {
-                dir('terraform') {
-                    sh 'terraform taint aws_launch_template.app_asg_lc'
-                    sh 'terraform apply -auto-approve'
-                }
-            }
-        }
         stage('terraform destroy') {
             when {
                 expression { return params.TERRAFORM_DESTROY }
