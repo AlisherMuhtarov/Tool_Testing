@@ -9,18 +9,16 @@ resource "aws_autoscaling_group" "app" {
     version = "$Latest"
   }
 
+  lifecycle {
+    create_before_destroy = true
+  }
+
   instance_refresh {
     strategy = "Rolling"
     preferences {
-      // You probably want more than 50% healthy depending on how much headroom you have
       min_healthy_percentage = 50
     }
-    // Depending the triggers you wish to configure, you may not want to include this
     triggers = ["tag"]
-
-    lifecycle {
-      create_before_destroy = true
-    }
   }
 }
 
