@@ -38,9 +38,9 @@ pipeline {
                         def remoteStateOutput = sh(script: 'terraform output -json', returnStdout: true).trim()
                         def remoteState = new groovy.json.JsonSlurper().parseText(remoteStateOutput)
 
-                        println "Parsed JSON: ${remoteState}" // Add this line to debug
+                        println "Parsed JSON: ${remoteState}" // For debugging, you can see the parsed JSON structure
 
-                        def launchTemplateValue = remoteState['aws_launch_template.app_asg_lc']?.value
+                        def launchTemplateValue = remoteState['aws_launch_template.app_asg_lc']?.toString()
 
                         if (launchTemplateValue == "some_value_that_indicates_change_applied") {
                             sh 'terraform apply -auto-approve -target=aws_launch_template.app_asg_lc'
