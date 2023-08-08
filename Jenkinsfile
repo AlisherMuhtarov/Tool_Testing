@@ -42,7 +42,11 @@ pipeline {
 
                         if (launchTemplateResourceExists) {
                             echo "Launch template resource exists. Applying specific target."
-                            sh 'terraform apply -auto-approve -target=aws_launch_template.app_asg_lc'
+                            sh """
+                            terraform apply -auto-approve \
+                            -target=aws_launch_template.app_asg_lc
+                            -target=aws_autoscaling_group.app
+                            """
                         } else {
                             echo "Launch template resource not found. Applying normally."
                             sh 'terraform apply -auto-approve'
