@@ -35,15 +35,16 @@ pipeline {
             steps {
                 dir('terraform') {
                     script{
-                    def launchTemplateValue = sh(script: 'terraform plan -out=tfplan', returnStatus: true, returnStdout: true).trim()
+                        def launchTemplateValue = sh(script: 'terraform plan -out=tfplan', returnStatus: true, returnStdout: true).trim()
 
-                    if (launchTemplateValue != null) {
-                        echo "Plan created: tfplan"
-                        
-                        if (launchTemplateValue.contains('some_value_that_indicates_change_applied')) {
-                            sh 'terraform apply -auto-approve -target=aws_launch_template.app_asg_lc'
-                        } else {
-                            sh 'terraform apply -auto-approve'
+                        if (launchTemplateValue != null) {
+                            echo "Plan created: tfplan"
+                            
+                            if (launchTemplateValue.contains('some_value_that_indicates_change_applied')) {
+                                sh 'terraform apply -auto-approve -target=aws_launch_template.app_asg_lc'
+                            } else {
+                                sh 'terraform apply -auto-approve'
+                            }
                         }
                     }
                 }
