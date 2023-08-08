@@ -48,9 +48,9 @@ pipeline {
                 }
             }
         }
-        stage('terraform apply -target=aws_launch_template') {
+        stage('Check Previous Build Result and Apply Launch Template') {
             when {
-                expression { return env.APPLY_RUN_ONCE == 'yes' }
+                expression { return env.APPLY_RUN_ONCE == 'yes' && currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
             }
             steps {
                 dir('terraform') {
@@ -59,9 +59,9 @@ pipeline {
                 }
             }
         }
-        stage('terraform apply -target=aws_launch_template again') {
+        stage('terraform apply -target=aws_launch_template') {
             when {
-                expression { return env.APPLY_RUN_ONCE == 'yes' }
+                expression { return env.APPLY_RUN_ONCE == 'yes' && currentBuild.resultIsWorseThan('SUCCESS') }
             }
             steps {
                 dir('terraform') {
