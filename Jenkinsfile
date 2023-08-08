@@ -35,14 +35,16 @@ pipeline {
             steps {
                 dir('terraform') {
                     script{
-                        def launchTemplateValue = sh(script: 'terraform plan -out=tfplan', returnStatus: true, returnStdout: true).trim()
+                            def showOutput = sh(script: 'terraform show', returnStdout: true).trim()
 
-                        if (launchTemplateValue != null) {
-                            echo "Plan created: tfplan"
-                            
-                            if (launchTemplateValue.contains('some_value_that_indicates_change_applied')) {
+                            // Check if the launch template resource is present in the show output
+                            def launchTemplateResourceExists = showOutput.contains('aws_launch_template.app_asg_lc')
+
+                            if (launchTemplateResourceExists) {
+                                echo "Launch template resource exists. Applying specific target."
                                 sh 'terraform apply -auto-approve -target=aws_launch_template.app_asg_lc'
                             } else {
+                                echo "Launch template resource not found. Applying normally."
                                 sh 'terraform apply -auto-approve'
                             }
                         }
