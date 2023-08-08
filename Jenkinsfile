@@ -36,7 +36,7 @@ pipeline {
                 dir('terraform') {
                     script{
                         def remoteState = sh(script: 'terraform output -json', returnStdout: true).trim()
-                        def launchTemplateResource = remoteState['launch_template_resource'] // Adjust the key to match your actual output
+                        def launchTemplateResource = remoteState['aws_launch_template.app_asg_lc'] // Adjust the key to match your actual output
 
                         if (launchTemplateResource == "some_value_that_indicates_change_applied") {
                             sh 'terraform apply -auto-approve -target=aws_launch_template.app_asg_lc'
