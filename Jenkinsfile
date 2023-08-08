@@ -34,8 +34,16 @@ pipeline {
             }
             steps {
                 dir('terraform') {
-                    sh "sed -i 's/ami_requirements.v9/${env.AMI_NAME}/g' data_source.tf"
-                    sh 'terraform apply -auto-approve'
+                    script{
+                        def remoteState = sh(script: 'terraform output -json', returnStdout: true).trim()
+                        def launchTemplateResource = remoteState['launch_template_resource'] // Adjust the key to match your actual output
+
+                        if (launchTemplateResource == "some_value_that_indicates_change_applied") {
+                            sh 'terraform apply -auto-approve -target=aws_launch_template'
+                        } else {
+                            sh 'terraform apply -auto-approve'
+                        }
+                    }
                 }
             }
             post {
@@ -45,28 +53,6 @@ pipeline {
                             env.APPLY_RUN_ONCE = 'yes'
                         }
                     }
-                }
-            }
-        }
-        stage('Check Previous Build Result and Apply Launch Template') {
-            when {
-                expression { return env.APPLY_RUN_ONCE == 'yes' && currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
-            }
-            steps {
-                dir('terraform') {
-                    sh "sed -i 's/ami_requirements.v9/${env.AMI_NAME}/g' data_source.tf"
-                    sh 'terraform apply -auto-approve -target=aws_launch_template'
-                }
-            }
-        }
-        stage('terraform apply -target=aws_launch_template') {
-            when {
-                expression { return env.APPLY_RUN_ONCE == 'yes' && currentBuild.resultIsWorseThan('SUCCESS') }
-            }
-            steps {
-                dir('terraform') {
-                    sh "sed -i 's/ami_requirements.v9/${env.AMI_NAME}/g' data_source.tf"
-                    sh 'terraform apply -auto-approve -target=aws_launch_template'
                 }
             }
         }
