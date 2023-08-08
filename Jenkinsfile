@@ -35,22 +35,19 @@ pipeline {
             steps {
                 dir('terraform') {
                     script{
-                        def showOutput = sh(script: 'terraform show', returnStdout: true).trim()
+                            def showOutput = sh(script: 'terraform show', returnStdout: true).trim()
 
-                        // Check if the launch template resource is present in the show output
-                        def launchTemplateResourceExists = showOutput.contains('aws_launch_template.app_asg_lc')
+                            // Check if the launch template resource is present in the show output
+                            def launchTemplateResourceExists = showOutput.contains('aws_launch_template.app_asg_lc')
 
-                        if (launchTemplateResourceExists) {
-                            echo "Launch template resource exists. Applying specific target."
-                            sh """
-                            terraform apply -auto-approve \
-                            -target=aws_launch_template.app_asg_lc
-                            -target=aws_autoscaling_group.app
-                            """
-                        } else {
-                            echo "Launch template resource not found. Applying normally."
-                            sh 'terraform apply -auto-approve'
-                        }
+                            if (launchTemplateResourceExists) {
+                                echo "Launch template resource exists. Applying specific target."
+                                sh 'terraform apply -auto-approve -target=aws_launch_template.app_asg_lc'
+                                sh 'terraform apply -auto-approve -target=aws_autoscaling_group.app'
+                            } else {
+                                echo "Launch template resource not found. Applying normally."
+                                sh 'terraform apply -auto-approve'
+                            }
                     }
                 }
             }
