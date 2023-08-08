@@ -36,7 +36,7 @@ pipeline {
                 dir('terraform') {
                     script{
                         def remoteStateOutput = sh(script: 'terraform output -json', returnStdout: true).trim()
-                        def remoteState = readJSON(text: remoteStateOutput)
+                        def remoteState = new groovy.json.JsonSlurper().parseText(remoteStateOutput)
 
                         def launchTemplateValue = remoteState['aws_launch_template.app_asg_lc']['value'] // Adjust the keys to match your actual output structure
 
