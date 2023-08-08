@@ -39,7 +39,7 @@ pipeline {
                         def launchTemplateResource = remoteState['launch_template_resource'] // Adjust the key to match your actual output
 
                         if (launchTemplateResource == "some_value_that_indicates_change_applied") {
-                            sh 'terraform apply -auto-approve -target=aws_launch_template'
+                            sh 'terraform apply -auto-approve -target=aws_launch_template.app_asg_lc'
                         } else {
                             sh 'terraform apply -auto-approve'
                         }
