@@ -15,14 +15,14 @@ data "amazon-ami" "amazonlinux" {
       root-device-type = "ebs"
   }
 
-  owners = [""] 
+  owners = ["555519622762"] 
   most_recent = true
   region = "us-east-1"
 }
 
 source "amazon-ebs" "launching" {
 
-  ami_name             = "ami_requirements.v9{{timestamp}}"
+  ami_name             = "hoodcustomizations-source-ami"
   instance_type        = "t2.micro"
   region               = "us-east-1"
   source_ami           = data.amazon-ami.amazonlinux.id
